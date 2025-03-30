@@ -57,18 +57,17 @@ cases and requirements.
 
 ## Deployment Addresses
 
-| Blockchain | Proxy | Implementation |
-| ---------- | ----- | -------------- |
-| Mainnet    | [`0x5F69f9aeEB44e713fBFBeb136d712b22ce49eb88`](https://etherscan.io/address/0x5F69f9aeEB44e713fBFBeb136d712b22ce49eb88) | [`0xF84c1bf6dC94f9DBdef81E61e974A6a8888263F9`](https://etherscan.io/address/0xF84c1bf6dC94f9DBdef81E61e974A6a8888263F9)  |
+| Blockchain | Proxy                                                                                                                              | Implementation                                                                                                                     |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Mainnet    | [`0x5F69f9aeEB44e713fBFBeb136d712b22ce49eb88`](https://etherscan.io/address/0x5F69f9aeEB44e713fBFBeb136d712b22ce49eb88)            | [`0xF84c1bf6dC94f9DBdef81E61e974A6a8888263F9`](https://etherscan.io/address/0xF84c1bf6dC94f9DBdef81E61e974A6a8888263F9)            |
 | Optimism   | [`0x9245A985d2055CeA7576B293Da8649bb6C5af9D0`](https://optimistic.etherscan.io/address/0x9245A985d2055CeA7576B293Da8649bb6C5af9D0) | [`0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc`](https://optimistic.etherscan.io/address/0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc) |
-| Arbitrum   | [`0x9245A985d2055CeA7576B293Da8649bb6C5af9D0`](https://arbiscan.io/address/0x9245A985d2055CeA7576B293Da8649bb6C5af9D0) | [`0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc`](https://arbiscan.io/address/0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc) |
-| Base       | [`0x9245A985d2055CeA7576B293Da8649bb6C5af9D0`](https://basescan.org/address/0x9245A985d2055CeA7576B293Da8649bb6C5af9D0) | [`0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc`](https://basescan.org/address/0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc) |
-| Gnosis     | [`0x9245A985d2055CeA7576B293Da8649bb6C5af9D0`](https://gnosisscan.io/address/0x9245A985d2055CeA7576B293Da8649bb6C5af9D0) | [`0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc`](https://gnosisscan.io/address/0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc) |
-| Berachain  | [`0x9245A985d2055CeA7576B293Da8649bb6C5af9D0`](https://berascan.com/address/0x9245A985d2055CeA7576B293Da8649bb6C5af9D0) | [`0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc`](https://berascan.com/address/0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc) |
-| Form       | [`0x9245A985d2055CeA7576B293Da8649bb6C5af9D0`](https://explorer.form.network/address/0x9245A985d2055CeA7576B293Da8649bb6C5af9D0) | [`0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc`](https://explorer.form.network/address/0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc) |
-| Unichain   | [`0x9245A985d2055CeA7576B293Da8649bb6C5af9D0`](https://uniscan.xyz/address/0x9245A985d2055CeA7576B293Da8649bb6C5af9D0) | [`0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc`](https://uniscan.xyz/address/0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc) |
-| Artela     | [`0x9245A985d2055CeA7576B293Da8649bb6C5af9D0`](https://artscan.artela.network/address/0x9245A985d2055CeA7576B293Da8649bb6C5af9D0) | [`0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc`](https://artscan.artela.network/address/0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc) |
-
+| Arbitrum   | [`0x9245A985d2055CeA7576B293Da8649bb6C5af9D0`](https://arbiscan.io/address/0x9245A985d2055CeA7576B293Da8649bb6C5af9D0)             | [`0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc`](https://arbiscan.io/address/0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc)             |
+| Base       | [`0x9245A985d2055CeA7576B293Da8649bb6C5af9D0`](https://basescan.org/address/0x9245A985d2055CeA7576B293Da8649bb6C5af9D0)            | [`0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc`](https://basescan.org/address/0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc)            |
+| Gnosis     | [`0x9245A985d2055CeA7576B293Da8649bb6C5af9D0`](https://gnosisscan.io/address/0x9245A985d2055CeA7576B293Da8649bb6C5af9D0)           | [`0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc`](https://gnosisscan.io/address/0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc)           |
+| Berachain  | [`0x9245A985d2055CeA7576B293Da8649bb6C5af9D0`](https://berascan.com/address/0x9245A985d2055CeA7576B293Da8649bb6C5af9D0)            | [`0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc`](https://berascan.com/address/0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc)            |
+| Form       | [`0x9245A985d2055CeA7576B293Da8649bb6C5af9D0`](https://explorer.form.network/address/0x9245A985d2055CeA7576B293Da8649bb6C5af9D0)   | [`0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc`](https://explorer.form.network/address/0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc)   |
+| Unichain   | [`0x9245A985d2055CeA7576B293Da8649bb6C5af9D0`](https://uniscan.xyz/address/0x9245A985d2055CeA7576B293Da8649bb6C5af9D0)             | [`0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc`](https://uniscan.xyz/address/0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc)             |
+| Artela     | [`0x9245A985d2055CeA7576B293Da8649bb6C5af9D0`](https://artscan.artela.network/address/0x9245A985d2055CeA7576B293Da8649bb6C5af9D0)  | [`0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc`](https://artscan.artela.network/address/0x8f9508C68ED70A7A02A4f8190604a81Ca8D79BEc)  |
 
 ## Scripts
 
@@ -119,7 +118,8 @@ For opening an onchain order you can run `yarn run:openOrder`. Make sure the fol
 For refunding an expired order you can run `yarn run:refundOrder`. Make sure the following environment variable are set:
 
 - `NETWORK`: the name of the network you want to run the script, it should be the destination network of your order
-- `USER_PK`: the private key to use for executing the tx, the address should own some gas to pay for the Hyperlane message
+- `USER_PK`: the private key to use for executing the tx, the address should own some gas to pay for the Hyperlane
+  message
 - `ORDER_ORIGIN`: the chain id of the order's origin chain
 - `ORDER_FILL_DEADLINE`: the `fillDeadline` used when opening the order
 - `ORDER_DATA`: the `orderData` used when opening the order

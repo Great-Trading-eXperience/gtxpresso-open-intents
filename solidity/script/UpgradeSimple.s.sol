@@ -3,10 +3,8 @@ pragma solidity >=0.8.25 <0.9.0;
 
 import { Script } from "forge-std/Script.sol";
 import { console2 } from "forge-std/console2.sol";
-
 import { ITransparentUpgradeableProxy } from "@openzeppelin/contracts/proxy/transparent/TransparentUpgradeableProxy.sol";
 import { ProxyAdmin } from "@openzeppelin/contracts/proxy/transparent/ProxyAdmin.sol";
-
 import { Hyperlane7683 } from "../src/Hyperlane7683.sol";
 
 /// @dev See the Solidity Scripting tutorial: https://book.getfoundry.sh/tutorials/solidity-scripting

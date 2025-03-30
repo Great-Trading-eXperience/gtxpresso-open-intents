@@ -10,9 +10,7 @@ import { ERC20 } from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import { Hyperlane7683 } from "../src/Hyperlane7683.sol";
 import { OrderData, OrderEncoder } from "../src/libs/OrderEncoder.sol";
 
-import {
-    OnchainCrossChainOrder
-} from "../src/ERC7683/IERC7683.sol";
+import { OnchainCrossChainOrder } from "../src/ERC7683/IERC7683.sol";
 
 /// @dev See the Solidity Scripting tutorial: https://book.getfoundry.sh/tutorials/solidity-scripting
 contract OpenOrder is Script {
@@ -21,7 +19,8 @@ contract OpenOrder is Script {
 
         vm.startBroadcast(deployerPrivateKey);
 
-        address localRouter = vm.envAddress("ROUTER_ADDRESS");
+        address localRouter = vm.envAddress("ORIGIN_ROUTER_ADDRESS");
+        address destinationRouter = vm.envAddress("DESTINATION_ROUTER_ADDRESS");
         address sender = vm.envAddress("ORDER_SENDER");
         address recipient = vm.envAddress("ORDER_RECIPIENT");
         address inputToken = vm.envAddress("ITT_INPUT");
@@ -33,7 +32,9 @@ contract OpenOrder is Script {
         uint256 destinationDomain = vm.envUint("DESTINATION_DOMAIN");
         uint32 fillDeadline = type(uint32).max;
 
-        ERC20(inputToken).approve(localRouter, amountIn);
+        if (inputToken != address(0)) {
+            ERC20(inputToken).approve(localRouter, amountIn);
+        }
 
         OrderData memory order = OrderData(
             TypeCasts.addressToBytes32(sender),
@@ -45,18 +46,19 @@ contract OpenOrder is Script {
             senderNonce,
             originDomain,
             uint32(destinationDomain),
-            TypeCasts.addressToBytes32(localRouter),
+            TypeCasts.addressToBytes32(destinationRouter),
             fillDeadline,
             new bytes(0)
         );
 
-        OnchainCrossChainOrder memory onchainOrder = OnchainCrossChainOrder(
-            fillDeadline,
-            OrderEncoder.orderDataType(),
-            OrderEncoder.encode(order)
-        );
+        OnchainCrossChainOrder memory onchainOrder =
+            OnchainCrossChainOrder(fillDeadline, OrderEncoder.orderDataType(), OrderEncoder.encode(order));
 
-        Hyperlane7683(localRouter).open(onchainOrder);
+        if (inputToken == address(0)) {
+            Hyperlane7683(localRouter).open{ value: amountIn }(onchainOrder);
+        } else {
+            Hyperlane7683(localRouter).open(onchainOrder);
+        }
 
         vm.stopBroadcast();
     }

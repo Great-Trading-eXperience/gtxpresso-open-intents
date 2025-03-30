@@ -9,11 +9,12 @@ import { GasRouter } from "@hyperlane-xyz/client/GasRouter.sol";
 
 import { Hyperlane7683 } from "../src/Hyperlane7683.sol";
 
-
 /// @dev See the Solidity Scripting tutorial: https://book.getfoundry.sh/tutorials/solidity-scripting
 contract EnrollRouter is Script {
     function run() public {
-        uint256 deployerPrivateKey = vm.envUint("OWNER_PK");
+        uint256 deployerPrivateKey = vm.envUint("DEPLOYER_PK");
+
+        address owner = vm.envAddress("ROUTER_OWNER");
 
         address localRouter = vm.envAddress("ROUTER");
         address[] memory routers = vm.envAddress("REMOTE_ROUTERS", ",");
@@ -25,17 +26,19 @@ contract EnrollRouter is Script {
         bytes32[] memory _routers = new bytes32[](domains.length);
         GasRouter.GasRouterConfig[] memory gasConfigs = new GasRouter.GasRouterConfig[](domains.length);
 
-        for (uint i = 0; i < domains.length; i++) {
-          _routers[i] = TypeCasts.addressToBytes32(routers[i]);
-          _domains[i] = uint32(domains[i]);
-          gasConfigs[i] = GasRouter.GasRouterConfig(_domains[i], gasDomains[i]);
+        for (uint256 i = 0; i < domains.length; i++) {
+            _routers[i] = TypeCasts.addressToBytes32(routers[i]);
+            _domains[i] = uint32(domains[i]);
+            gasConfigs[i] = GasRouter.GasRouterConfig(_domains[i], gasDomains[i]);
         }
 
         vm.startBroadcast(deployerPrivateKey);
 
-        Hyperlane7683(localRouter).enrollRemoteRouters(_domains, _routers);
-
         Hyperlane7683(localRouter).setDestinationGas(gasConfigs);
+
+        // Hyperlane7683(localRouter).enrollRemoteRouters(_domains, _routers);
+
+        // Hyperlane7683(localRouter).transferOwnership(owner);
 
         vm.stopBroadcast();
     }

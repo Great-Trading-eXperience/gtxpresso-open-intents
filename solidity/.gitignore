@@ -8,7 +8,7 @@ node_modules
 out
 
 # files
-*.env
+*.env*
 *.env.testnet
 *.log
 .DS_Store

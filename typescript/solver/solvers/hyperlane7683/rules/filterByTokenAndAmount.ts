@@ -21,7 +21,7 @@ export function filterByTokenAndAmount(
   FilterByTokenAndAmountArgs.parse(args);
 
   const allowedTokens: Record<string, string[]> = {};
-  
+
   for (const [chainId, tokens] of Object.entries(args)) {
     allowedTokens[chainId] = [];
 
@@ -29,23 +29,29 @@ export function filterByTokenAndAmount(
       allowedTokens[chainId].push(token.toLowerCase());
     }
   }
+  // console.log("allowedTokens", JSON.stringify(allowedTokens, null, 2));
 
   return async (parsedArgs) => {
     const tokenIn = bytes32ToAddress(
       parsedArgs.resolvedOrder.minReceived[0].token,
     );
+    console.log("tokenIn", tokenIn);
     const originChainId =
       parsedArgs.resolvedOrder.minReceived[0].chainId.toString();
+    console.log("originChainId", originChainId);
 
     const tokenOut = bytes32ToAddress(
       parsedArgs.resolvedOrder.maxSpent[0].token,
     );
+    console.log("tokenOut", tokenOut);
     const destChainId = parsedArgs.resolvedOrder.maxSpent[0].chainId.toString();
+    console.log("destChainId", destChainId);
 
     if (
       !allowedTokens[originChainId] ||
       !allowedTokens[originChainId].includes(tokenIn.toLowerCase())
     ) {
+      console.log("Input token is not allowed");
       return { error: "Input token is not allowed", success: false };
     }
 
@@ -53,26 +59,36 @@ export function filterByTokenAndAmount(
       !allowedTokens[destChainId] ||
       !allowedTokens[destChainId].includes(tokenOut.toLowerCase())
     ) {
+      console.log("Output token is not allowed");
       return { error: "Output token is not allowed", success: false };
     }
 
     let maxAmount = args[originChainId][tokenIn];
+    console.log("maxAmount", maxAmount);
 
     if (maxAmount === null) {
       maxAmount = BigInt(MaxUint256.toString());
     }
 
     const amountIn = parsedArgs.resolvedOrder.minReceived[0].amount;
+    console.log("amountIn", amountIn);
     const amountOut = parsedArgs.resolvedOrder.maxSpent[0].amount;
+    console.log("amountOut", amountOut);
 
     if (amountIn.lte(amountOut)) {
+      console.log("Intent is not profitable");
       return { error: "Intent is not profitable", success: false };
     }
-    
+
     if (amountOut.gt(maxAmount.toString())) {
-      return { error: "Output amount exceeds the maximum allowed", success: false };
+      console.log("Output amount exceeds the maximum allowed");
+      return {
+        error: "Output amount exceeds the maximum allowed",
+        success: false,
+      };
     }
 
+    console.log("Amounts and tokens are Ok");
     return { data: "Amounts and tokens are Ok", success: true };
   };
 }

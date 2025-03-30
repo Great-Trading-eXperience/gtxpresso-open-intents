@@ -24,40 +24,43 @@ contract DeploySimple is Script {
     function run() public {
         uint256 deployerPrivateKey = vm.envUint("DEPLOYER_PK");
 
-        address owner = vm.envAddress("ROUTER_OWNER");
+        // address owner = vm.envAddress("ROUTER_OWNER");
 
-        uint256[] memory domains = vm.envUint("DOMAINS", ",");
-        uint256[] memory gasDomains = vm.envUint("GAS_BY_DOMAIN", ",");
-        address[] memory routers = vm.envAddress("ROUTERS", ",");
-        assert(routers.length == domains.length && domains.length == gasDomains.length);
-        uint32[] memory _domains = new uint32[](domains.length);
-        bytes32[] memory _routers = new bytes32[](domains.length);
-        GasRouter.GasRouterConfig[] memory gasConfigs = new GasRouter.GasRouterConfig[](domains.length);
+        // uint256[] memory domains = vm.envUint("DOMAINS", ",");
+        // uint256[] memory gasDomains = vm.envUint("GAS_BY_DOMAIN", ",");
+        // address[] memory routers = vm.envAddress("ROUTERS", ",");
+        // assert(routers.length == domains.length && domains.length == gasDomains.length);
+        // uint32[] memory _domains = new uint32[](domains.length);
+        // bytes32[] memory _routers = new bytes32[](domains.length);
+        // GasRouter.GasRouterConfig[] memory gasConfigs = new GasRouter.GasRouterConfig[](domains.length);
 
         vm.startBroadcast(deployerPrivateKey);
+
+        // address proxyAdmin = vm.envAddress("PROXY_ADMIN");
+        // ProxyAdmin proxyAdmin = OwnableProxyAdmin(proxyAdminAddr);
 
         ProxyAdmin proxyAdmin = deployProxyAdmin();
         address routerImpl = deployImplementation();
         TransparentUpgradeableProxy proxy = deployProxy(routerImpl, address(proxyAdmin));
 
-        for (uint i = 0; i < domains.length; i++) {
-          _routers[i] = TypeCasts.addressToBytes32(routers[i]);
-          _domains[i] = uint32(domains[i]);
-          gasConfigs[i] = GasRouter.GasRouterConfig(_domains[i], gasDomains[i]);
-        }
+        // for (uint256 i = 0; i < domains.length; i++) {
+        //     _routers[i] = TypeCasts.addressToBytes32(routers[i]);
+        //     _domains[i] = uint32(domains[i]);
+        //     gasConfigs[i] = GasRouter.GasRouterConfig(_domains[i], gasDomains[i]);
+        // }
 
-        Hyperlane7683(address(proxy)).enrollRemoteRouters(_domains, _routers);
+        // Hyperlane7683(address(proxy)).enrollRemoteRouters(_domains, _routers);
 
-        Hyperlane7683(address(proxy)).setDestinationGas(gasConfigs);
+        // Hyperlane7683(address(proxy)).setDestinationGas(gasConfigs);
 
-        Hyperlane7683(address(proxy)).transferOwnership(owner);
+        // Hyperlane7683(address(proxy)).transferOwnership(owner);
 
         vm.stopBroadcast();
 
         // solhint-disable-next-line no-console
-        console2.log("Router Proxy:", address(proxy));
-        console2.log("Implementation:", routerImpl);
         console2.log("ProxyAdmin:", address(proxyAdmin));
+        console2.log("Implementation:", routerImpl);
+        console2.log("Router Proxy:", address(proxy));
     }
 
     function deployProxyAdmin() internal returns (ProxyAdmin proxyAdmin) {
@@ -78,9 +81,9 @@ contract DeploySimple is Script {
         address initialOwner = vm.addr(deployerPrivateKey);
 
         proxy = new TransparentUpgradeableProxy(
-          routerImpl,
-          proxyAdmin,
-          abi.encodeWithSelector(Hyperlane7683.initialize.selector, address(0), address(0), initialOwner)
+            routerImpl,
+            proxyAdmin,
+            abi.encodeWithSelector(Hyperlane7683.initialize.selector, address(0), address(0), initialOwner)
         );
     }
 }

@@ -27,6 +27,8 @@ export async function settleOrder(
     const destinationSettler = bytes32ToAddress(
       fillInstruction.destinationSettler,
     );
+    // const destinationChain = originChainId.toString();
+    // const destinationSettler = bytes32ToAddress(fillInstruction.destinationSettler);
 
     acc[destinationChain] ||= [];
     acc[destinationChain].push(destinationSettler);

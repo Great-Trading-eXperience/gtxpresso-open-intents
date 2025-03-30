@@ -1,13 +1,13 @@
 import "@nomicfoundation/hardhat-foundry";
-import '@nomiclabs/hardhat-ethers';
-import '@typechain/hardhat';
+import "@nomiclabs/hardhat-ethers";
+import "@typechain/hardhat";
 
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
   solidity: {
-    version: '0.8.25',
+    version: "0.8.25",
     settings: {
       optimizer: {
         enabled: true,
@@ -16,8 +16,8 @@ module.exports = {
     },
   },
   typechain: {
-    outDir: './types',
-    target: 'ethers-v5',
+    outDir: "./types",
+    target: "ethers-v5",
     alwaysGenerateOverloads: true,
     node16Modules: true,
   },

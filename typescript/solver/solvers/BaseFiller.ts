@@ -70,6 +70,7 @@ export abstract class BaseFiller<
       }
 
       const intent = await this.prepareIntent(parsedArgs);
+      this.log.info(`Intent prepared: ${JSON.stringify(intent)}`);
 
       if (!intent.success) {
         this.log.error(`Failed evaluating filling Intent: ${intent.error}`);
@@ -115,6 +116,10 @@ export abstract class BaseFiller<
       throw new Error("Not allowed intent");
     }
 
+    this.log.info({
+      msg: "Parsed arguments",
+      parsedArgs: JSON.stringify(parsedArgs),
+    });
     const result = await this.evaluateRules(parsedArgs);
 
     if (!result.success) {
@@ -126,6 +131,10 @@ export abstract class BaseFiller<
 
   protected async evaluateRules(parsedArgs: TParsedArgs) {
     let result: Result<string> = { success: true, data: "No rules" };
+    this.log.info({
+      msg: "Evaluating rules",
+      parsedArgs: JSON.stringify(this.rules),
+    });
 
     for (const rule of this.rules) {
       result = await rule(parsedArgs, this);

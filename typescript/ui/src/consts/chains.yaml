@@ -2,7 +2,7 @@
 # Chains can be defined here, in chains.json, or in chains.ts
 # Chains already in the SDK need not be included here unless you want to override some fields
 # Schema here: https://github.com/hyperlane-xyz/hyperlane-monorepo/blob/main/typescript/sdk/src/metadata/chainMetadataTypes.ts
----
+# ---
 # Example using local anvil chain:
 # anvil1:
 #   chainId: 31337
@@ -11,10 +11,32 @@
 #   protocol: ethereum
 #   rpcUrls:
 #     - http: http://127.0.0.1:8545
-# anvil2:
-#   chainId: 31338
-#   domainId: 31338
-#   name: anvil2
-#   protocol: ethereum
-#   rpcUrls:
-#     - http: http://127.0.0.1:8555
+# YAML data
+---
+chainId: 1020201
+domainId: 1020201
+name: gtxpresso
+displayName: GTXpresso
+protocol: ethereum
+rpcUrls:
+  - http: http://157.173.201.26:8547
+    pagination:
+      maxBlockRange: 3000
+blocks:
+  confirmations: 543
+  reorgPeriod: 1
+  estimateBlockTime: 10
+logoURI: /gtxpresso-logo.png
+---
+chainId: 421611
+domainId: 421611
+name: arbitrumsepolia
+displayName: Arbitrum Sepolia
+protocol: ethereum
+rpcUrls:
+  - http: https://sepolia.arbitrum.io/rpc
+blocks:
+  confirmations: 12
+  reorgPeriod: 2
+  estimateBlockTime: 15
+logoURI: /arb-sepolia-logo.png

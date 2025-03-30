@@ -15,7 +15,7 @@
   src = "src"
   test = "test"
   allow_paths = ["node_modules"]
-  libs = ['node_modules', '../node_modules']
+  libs = ["/Users/ammar.robb/Documents/Web 3/Espresso/intents-framework/node_modules", "node_modules", "lib"]
 
 [profile.ci]
   fuzz = { runs = 10_000 }
@@ -38,17 +38,22 @@
   polygon = { key = "${API_KEY_POLYGONSCAN}" }
   sepolia = { key = "${API_KEY_ETHERSCAN}" }
 
+  gtxpresso = { key = "" }
+  # arbitrum-sepolia = { key = "${API_KEY_ARBISCAN}" }
+
 [fmt]
   bracket_spacing = true
   int_types = "long"
   line_length = 120
   multiline_func_header = "all"
+  multiline_func_call = "all"
   number_underscore = "thousands"
   quote_style = "double"
   tab_width = 4
   wrap_comments = true
 
 [rpc_endpoints]
+  default_network = "http://127.0.0.1:8545"
   mainnet = "https://rpc.ankr.com/eth"
   optimism = "https://mainnet.optimism.io"
   arbitrum = "https://arb1.arbitrum.io/rpc"
@@ -67,3 +72,5 @@
   arbitrum-sepolia = "https://arb-sepolia.g.alchemy.com/v2/${API_KEY_ALCHEMY}"
   base-sepolia = "https://base-sepolia.g.alchemy.com/v2/${API_KEY_ALCHEMY}"
   sepolia = "https://eth-sepolia.g.alchemy.com/v2/${API_KEY_ALCHEMY}"
+
+  gtxpresso = "http://157.173.201.26:8547"

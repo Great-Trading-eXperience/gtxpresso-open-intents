@@ -1,5 +1,8 @@
 FROM node:20-alpine
 
+# Install dependencies
+RUN apk add --no-cache git
+
 # Bundle APP files
 WORKDIR /workspace
 COPY .  ./

@@ -1,4 +1,3 @@
-import { get } from '@vercel/edge-config';
 import { geolocation } from '@vercel/functions';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -62,13 +61,13 @@ export async function middleware(req: NextRequest) {
   }
 
   // maintenance mode
-  const isInMaintenanceMode = await get<boolean>('isInMaintenanceMode');
+  // const isInMaintenanceMode = await get<boolean>('isInMaintenanceMode');
 
-  if (isInMaintenanceMode) {
-    req.nextUrl.pathname = '/maintenance';
+  // if (isInMaintenanceMode) {
+  //   req.nextUrl.pathname = '/maintenance';
 
-    return NextResponse.rewrite(req.nextUrl);
-  }
+  //   return NextResponse.rewrite(req.nextUrl);
+  // }
 
   // default
   return NextResponse.next();

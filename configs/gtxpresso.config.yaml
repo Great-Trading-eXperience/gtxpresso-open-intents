@@ -1,0 +1,13 @@
+defaultHook:
+  type: merkleTreeHook
+defaultIsm:
+  type: testIsm
+owner: "0x77C037fbF42e85dB1487B390b08f58C00f438812"
+proxyAdmin:
+  owner: "0x77C037fbF42e85dB1487B390b08f58C00f438812"
+requiredHook:
+  beneficiary: "0x77C037fbF42e85dB1487B390b08f58C00f438812"
+  maxProtocolFee: "10000000000000000000000000"
+  owner: "0x77C037fbF42e85dB1487B390b08f58C00f438812"
+  protocolFee: "0"
+  type: protocolFee
