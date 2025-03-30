@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=../schema.json
+chainId: 1020201
+displayName: GTXpresso
+domainId: 1020201
+index:
+  from: 93
+isTestnet: true
+name: gtxpresso
+nativeToken:
+  decimals: 18
+  name: Ether
+  symbol: ETH
+protocol: ethereum
+rpcUrls:
+  - http: http://157.173.201.26:8547
+technicalStack: arbitrumnitro

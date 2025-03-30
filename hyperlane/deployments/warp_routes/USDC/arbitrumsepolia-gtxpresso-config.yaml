@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../schema.json
+tokens:
+  - addressOrDenom: "0x363200470A6f8565Db03c5eaf2cAAb676d690698"
+    chainName: arbitrumsepolia
+    collateralAddressOrDenom: "0x1EEC8DA99e0a34481A4b364AF4740C8AC2FF5BC5"
+    connections:
+      - token: ethereum|gtxpresso|0xe76CC28AaF7Fb2b778f05392Fd0a668A161F57f7
+    decimals: 6
+    name: Mock USDC
+    standard: EvmHypCollateral
+    symbol: USDC
+  - addressOrDenom: "0xe76CC28AaF7Fb2b778f05392Fd0a668A161F57f7"
+    chainName: gtxpresso
+    connections:
+      - token: ethereum|arbitrumsepolia|0x363200470A6f8565Db03c5eaf2cAAb676d690698
+    decimals: 6
+    name: Mock USDC
+    standard: EvmHypSynthetic
+    symbol: USDC

@@ -36,45 +36,6 @@ const WBTC_GTX =
 const metadata: Hyperlane7683Metadata = {
   protocolName: "Hyperlane7683",
   intentSources: [
-    // mainnet
-    // {
-    //   address: "0x5F69f9aeEB44e713fBFBeb136d712b22ce49eb88",
-    //   chainName: "ethereum",
-    // },
-    // {
-    //   address: "0x9245A985d2055CeA7576B293Da8649bb6C5af9D0",
-    //   chainName: "optimism",
-    // },
-    // {
-    //   address: "0x9245A985d2055CeA7576B293Da8649bb6C5af9D0",
-    //   chainName: "arbitrum",
-    // },
-    // {
-    //   address: "0x9245A985d2055CeA7576B293Da8649bb6C5af9D0",
-    //   chainName: "base",
-    // },
-    // {
-    //   address: "0x9245A985d2055CeA7576B293Da8649bb6C5af9D0",
-    //   chainName: "gnosis",
-    // },
-    // {
-    //   address: "0x9245A985d2055CeA7576B293Da8649bb6C5af9D0",
-    //   chainName: "berachain",
-    // },
-    // {
-    //   address: "0x9245A985d2055CeA7576B293Da8649bb6C5af9D0",
-    //   chainName: "form",
-    // },
-    // {
-    //   address: "0x9245A985d2055CeA7576B293Da8649bb6C5af9D0",
-    //   chainName: "unichain",
-    // },
-    // {
-    //   address: "0x9245A985d2055CeA7576B293Da8649bb6C5af9D0",
-    //   chainName: "artela",
-    // },
-
-    // testnet
     {
       address: "0x9EC1bC024132cA18AFC6da7395B7121b73C5E01E",
       chainName: "gtxpresso",
@@ -84,21 +45,6 @@ const metadata: Hyperlane7683Metadata = {
       address: "0x87c7Dfd251B2DCfA7aA5E3d117b10009e0f7d770",
       chainName: "arbitrumsepolia",
     },
-    // {
-    //   address: "0xf614c6bF94b022E16BEF7dBecF7614FFD2b201d3",
-    //   chainName: "optimismsepolia",
-    // },
-    // {
-    //   address: "0xf614c6bF94b022E16BEF7dBecF7614FFD2b201d3",
-    //   chainName: "sepolia",
-    // },
-    // {
-    //   address: "0xf614c6bF94b022E16BEF7dBecF7614FFD2b201d3",
-    //   chainName: "basesepolia",
-    //   initialBlock: 21491220,
-    //   pollInterval: 1000,
-    //   confirmationBlocks: 2,
-    // },
   ],
   customRules: {
     rules: [
@@ -106,38 +52,24 @@ const metadata: Hyperlane7683Metadata = {
         name: "filterByTokenAndAmount",
         args: {
           "421614": {
-            // "0x77C037fbF42e85dB1487B390b08f58C00f438812": null,
-            [AddressZero]: BigInt(1e15),
-            [WETH_ARB]: BigInt(1e8),
-            [WBTC_ARB]: BigInt(1e8),
-            [USDC_ARB]: BigInt(1e8),
-            [TRUMP_ARB]: BigInt(1e8),
-            [PEPE_ARB]: BigInt(1e8),
-            [LINK_ARB]: BigInt(1e8),
-            [DOGE_ARB]: BigInt(1e8),
+            [AddressZero]: null,
+            [WETH_ARB]: null,
+            [WBTC_ARB]: null,
+            [USDC_ARB]: null,
+            [TRUMP_ARB]: null,
+            [PEPE_ARB]: null,
+            [LINK_ARB]: null,
+            [DOGE_ARB]: null,
           },
           "1020201": {
-            // "0x77C037fbF42e85dB1487B390b08f58C00f438812": null,
-            [AddressZero]: BigInt(1e15),
-            [WETH_GTX]: BigInt(1e8),
-            [DOGE_GTX]: BigInt(1e8),
-            [LINK_GTX]: BigInt(1e8),
-            [TRUMP_GTX]: BigInt(1e8),
-            [USDC_GTX]: BigInt(1e8),
-            [WBTC_GTX]: BigInt(1e8),
+            [AddressZero]: null,
+            [WETH_GTX]: null,
+            [DOGE_GTX]: null,
+            [LINK_GTX]: null,
+            [TRUMP_GTX]: null,
+            [USDC_GTX]: null,
+            [WBTC_GTX]: null,
           },
-          // "11155420": {
-          //   "0x5f94BC7Fb4A2779fef010F96b496cD36A909E818": BigInt(50e18),
-          //   [AddressZero]: BigInt(5e15),
-          // },
-          // "84532": {
-          //   "0x5f94BC7Fb4A2779fef010F96b496cD36A909E818": BigInt(50e18),
-          //   [AddressZero]: BigInt(5e15),
-          // },
-          // "11155111": {
-          //   "0x5f94BC7Fb4A2779fef010F96b496cD36A909E818": BigInt(5e18),
-          //   [AddressZero]: BigInt(5e10),
-          // },
         },
       },
       {

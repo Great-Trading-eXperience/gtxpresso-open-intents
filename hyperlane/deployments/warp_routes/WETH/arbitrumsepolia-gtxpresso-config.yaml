@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../schema.json
+tokens:
+  - addressOrDenom: "0x688C62347A0040C5f614F0903E7B6aCd8385b09B"
+    chainName: arbitrumsepolia
+    collateralAddressOrDenom: "0x552256420C00844F77DB871b887A635525cf6840"
+    connections:
+      - token: ethereum|gtxpresso|0xd786Baf47F03c9b6746f4AB73736a3155F773a0f
+    decimals: 18
+    name: Mock WETH
+    standard: EvmHypCollateral
+    symbol: WETH
+  - addressOrDenom: "0xd786Baf47F03c9b6746f4AB73736a3155F773a0f"
+    chainName: gtxpresso
+    connections:
+      - token: ethereum|arbitrumsepolia|0x688C62347A0040C5f614F0903E7B6aCd8385b09B
+    decimals: 18
+    name: Mock WETH
+    standard: EvmHypSynthetic
+    symbol: WETH

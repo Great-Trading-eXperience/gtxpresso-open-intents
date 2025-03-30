@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../schema.json
+tokens:
+  - addressOrDenom: "0x2490f5D28b81895e6Ae70A3bF4de6b286da2824f"
+    chainName: arbitrumsepolia
+    collateralAddressOrDenom: "0xA89EA4eF4cbBCC4cFFd3Dc95D279Ee05054E499e"
+    connections:
+      - token: ethereum|gtxpresso|0x6F199125B610A34F3a9A02c24416EAB4Ac1d46F6
+    decimals: 18
+    name: Mock TRUMP
+    standard: EvmHypCollateral
+    symbol: TRUMP
+  - addressOrDenom: "0x6F199125B610A34F3a9A02c24416EAB4Ac1d46F6"
+    chainName: gtxpresso
+    connections:
+      - token: ethereum|arbitrumsepolia|0x2490f5D28b81895e6Ae70A3bF4de6b286da2824f
+    decimals: 18
+    name: Mock TRUMP
+    standard: EvmHypSynthetic
+    symbol: TRUMP

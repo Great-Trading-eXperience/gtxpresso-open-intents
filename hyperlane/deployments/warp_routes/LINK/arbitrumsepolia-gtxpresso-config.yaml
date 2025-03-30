@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../schema.json
+tokens:
+  - addressOrDenom: "0x951d452F49ce7D0A450500CCC24436D92da0f557"
+    chainName: arbitrumsepolia
+    collateralAddressOrDenom: "0xdeBFCB6A900635aea9C6BF01e0B303a02A4BFb82"
+    connections:
+      - token: ethereum|gtxpresso|0x13378548Fef28F9C17D2B721C41C7796A740266d
+    decimals: 18
+    name: Mock Chainlink
+    standard: EvmHypCollateral
+    symbol: LINK
+  - addressOrDenom: "0x13378548Fef28F9C17D2B721C41C7796A740266d"
+    chainName: gtxpresso
+    connections:
+      - token: ethereum|arbitrumsepolia|0x951d452F49ce7D0A450500CCC24436D92da0f557
+    decimals: 18
+    name: Mock Chainlink
+    standard: EvmHypSynthetic
+    symbol: LINK

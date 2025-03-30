@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../schema.json
+tokens:
+  - addressOrDenom: "0xBddB159e96cc7C68a4f401435ae885c3244F8A42"
+    chainName: arbitrumsepolia
+    collateralAddressOrDenom: "0xC50144b9B0284153f1C8660f6381c3DD2D69F1b5"
+    connections:
+      - token: ethereum|gtxpresso|0x3CfA285c5Cc69252093A5a2859869489D5A63650
+    decimals: 8
+    name: Mock DOGE
+    standard: EvmHypCollateral
+    symbol: DOGE
+  - addressOrDenom: "0x3CfA285c5Cc69252093A5a2859869489D5A63650"
+    chainName: gtxpresso
+    connections:
+      - token: ethereum|arbitrumsepolia|0xBddB159e96cc7C68a4f401435ae885c3244F8A42
+    decimals: 8
+    name: Mock DOGE
+    standard: EvmHypSynthetic
+    symbol: DOGE

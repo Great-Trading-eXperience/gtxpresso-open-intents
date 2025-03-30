@@ -1,0 +1,54 @@
+{
+  "hook": {
+    "gtxpresso": {
+      "0xDD239eD29C963B4acf8092bf43842208F9c2A51a": {
+        "type": "merkleTreeHook",
+        "address": "0xDD239eD29C963B4acf8092bf43842208F9c2A51a"
+      },
+      "0x6D5AF55983816B435C6E501caFD34535Cf28582f": {
+        "type": "merkleTreeHook",
+        "address": "0x6D5AF55983816B435C6E501caFD34535Cf28582f"
+      }
+    },
+    "arbitrumsepolia": {
+      "0x8c7dA3BBB98670A738e4137c5Ec16F37299503F7": {
+        "address": "0x8c7dA3BBB98670A738e4137c5Ec16F37299503F7",
+        "type": "merkleTreeHook"
+      }
+    }
+  },
+  "ism": {
+    "arbitrumsepolia": {
+      "0xCCCa89906Aefe71E6788825855f7F32462Dbc533": {
+        "type": "testIsm",
+        "address": "0xCCCa89906Aefe71E6788825855f7F32462Dbc533"
+      }
+    },
+    "gtxpresso": {
+      "0xFB91d1E4A99C49A4162097Dd1AaD90eb60DF7EF3": {
+        "address": "0xFB91d1E4A99C49A4162097Dd1AaD90eb60DF7EF3",
+        "type": "staticAggregationIsm",
+        "modules": [
+          {
+            "address": "0x70DD7089b66B7B47b3020962d703C0B8f019DFC2",
+            "relayer": "0x77C037fbF42e85dB1487B390b08f58C00f438812",
+            "type": "trustedRelayerIsm"
+          },
+          {
+            "owner": "0x77C037fbF42e85dB1487B390b08f58C00f438812",
+            "address": "0x9508eEBbEFaca2e257b094c7bf0F2a1105c1A42e",
+            "type": "defaultFallbackRoutingIsm",
+            "domains": {
+              "arbitrumsepolia": {
+                "address": "0xB953a000D1c0F458500178b699B59cDf4C6d5b72",
+                "type": "testIsm"
+              }
+            }
+          }
+        ],
+        "threshold": 1
+      }
+    }
+  },
+  "backlog": []
+}

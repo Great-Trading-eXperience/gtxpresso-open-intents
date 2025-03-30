@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../schema.json
+tokens:
+  - addressOrDenom: "0x89BC65c8898b3AeDf19a582AA66995A837337DB2"
+    chainName: arbitrumsepolia
+    collateralAddressOrDenom: "0xaFDc3DE41a8D3dD69e35e401BF5505C8A7F5041A"
+    connections:
+      - token: ethereum|gtxpresso|0x0a96BeFe6dDf44F8905E3A7E4dC78aA95C0f9327
+    decimals: 8
+    name: Mock WBTC
+    standard: EvmHypCollateral
+    symbol: WBTC
+  - addressOrDenom: "0x0a96BeFe6dDf44F8905E3A7E4dC78aA95C0f9327"
+    chainName: gtxpresso
+    connections:
+      - token: ethereum|arbitrumsepolia|0x89BC65c8898b3AeDf19a582AA66995A837337DB2
+    decimals: 8
+    name: Mock WBTC
+    standard: EvmHypSynthetic
+    symbol: WBTC
