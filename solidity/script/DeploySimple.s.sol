@@ -72,8 +72,6 @@ contract DeploySimple is Script {
     function deployImplementation() internal returns (address routerImpl) {
         address mailbox = vm.envAddress("MAILBOX");
         address permit2 = vm.envAddress("PERMIT2");
-        console2.log("Mailbox Address:", mailbox);
-        console2.log("Permit2 Address:", permit2);
 
         return address(new Hyperlane7683(mailbox, permit2));
     }

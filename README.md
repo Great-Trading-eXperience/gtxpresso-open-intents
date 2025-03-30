@@ -77,6 +77,23 @@ docker exec -it <container-id> pm2 show
 docker exec -it <container-id> pm2 reload all
 ```
 
+### Running the Solidity Script
+
+If you want to try running the Solidity script, navigate to the `solidity` folder and execute the following commands:
+
+```bash
+# Navigate to the solidity folder
+cd solidity
+
+# Run the DeploySimple script
+yarn run:deploySimple
+
+# Run the OpenOrder script
+yarn run:openOrder
+```
+
+Ensure that the environment variables required by the script are properly configured
+
 ### Versioning
 
 For the versions available, see the tags on this repository.
