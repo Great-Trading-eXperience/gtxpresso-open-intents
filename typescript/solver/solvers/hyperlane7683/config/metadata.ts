@@ -1,5 +1,4 @@
 import { AddressZero } from "@ethersproject/constants";
-
 import {
   type Hyperlane7683Metadata,
   Hyperlane7683MetadataSchema,
@@ -37,12 +36,16 @@ const metadata: Hyperlane7683Metadata = {
   protocolName: "Hyperlane7683",
   intentSources: [
     {
-      address: "0x9EC1bC024132cA18AFC6da7395B7121b73C5E01E",
+      address:
+        process.env.ROUTER_GTX_ADDRESS ||
+        "0x9EC1bC024132cA18AFC6da7395B7121b73C5E01E",
       chainName: "gtxpresso",
       initialBlock: 543,
     },
     {
-      address: "0x87c7Dfd251B2DCfA7aA5E3d117b10009e0f7d770",
+      address:
+        process.env.ROUTER_ADDRESS ||
+        "0x87c7Dfd251B2DCfA7aA5E3d117b10009e0f7d770",
       chainName: "arbitrumsepolia",
     },
   ],
