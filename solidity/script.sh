@@ -6,6 +6,12 @@ source .env
 # --rpc-url $RPC_URL \
 # --quiet > /dev/null 2>&1 && echo "success: true" || echo "success: false"
 
+# cast send $WETH_GTX_ADDRESS "mint(address,uint256)" \
+# 0xd786Baf47F03c9b6746f4AB73736a3155F773a0f 100000000000000000000 \
+# --private-key $HYP_KEY \
+# --rpc-url $RPC_URL \
+# --quiet > /dev/null 2>&1 && echo "success: true" || echo "success: false"
+
 # cast send $WBTC_ADDRESS "mint(address,uint256)" \
 # $ROUTER_OWNER 100000000000000000000 \
 # --private-key $HYP_KEY \
@@ -13,7 +19,7 @@ source .env
 # --quiet > /dev/null 2>&1 && echo "success: true" || echo "success: false"
 
 # cast send $USDC_ADDRESS "mint(address,uint256)" \
-# $ROUTER_OWNER 100000000000000000000 \
+# 0x1D1967ff22Df0354c54dCD81Bd295bF13C03024c 100000000000000000000 \
 # --private-key $HYP_KEY \
 # --rpc-url $RPC_URL \
 # --quiet > /dev/null 2>&1 && echo "success: true" || echo "success: false"

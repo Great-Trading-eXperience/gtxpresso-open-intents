@@ -75,10 +75,10 @@ export function filterByTokenAndAmount(
     const amountOut = parsedArgs.resolvedOrder.maxSpent[0].amount;
     console.log("amountOut", amountOut);
 
-    if (amountIn.lte(amountOut)) {
-      console.log("Intent is not profitable");
-      return { error: "Intent is not profitable", success: false };
-    }
+    // if (amountIn.lte(amountOut)) {
+    //   console.log("Intent is not profitable");
+    //   return { error: "Intent is not profitable", success: false };
+    // }
 
     if (amountOut.gt(maxAmount.toString())) {
       console.log("Output amount exceeds the maximum allowed");

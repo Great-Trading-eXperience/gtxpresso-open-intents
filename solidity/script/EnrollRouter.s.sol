@@ -36,7 +36,7 @@ contract EnrollRouter is Script {
 
         Hyperlane7683(localRouter).setDestinationGas(gasConfigs);
 
-        // Hyperlane7683(localRouter).enrollRemoteRouters(_domains, _routers);
+        Hyperlane7683(localRouter).enrollRemoteRouters(_domains, _routers);
 
         // Hyperlane7683(localRouter).transferOwnership(owner);
 

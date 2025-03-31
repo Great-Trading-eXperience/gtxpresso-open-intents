@@ -31,6 +31,8 @@ abstract contract BasicSwap7683 is Base7683 {
     // ============ Libraries ============
     using SafeERC20 for IERC20;
 
+    // =========== Enum ============
+    enum OrderAction { TRANSFER, SWAP }
     // ============ Constants ============
     /// @notice Status constant indicating that an order has been settled.
     bytes32 public constant SETTLED = "SETTLED";
@@ -378,7 +380,7 @@ abstract contract BasicSwap7683 is Base7683 {
             fillInstructions: fillInstructions
         });
 
-        nonce = orderData.senderNonce;
+        // nonce = orderData.senderNonce;
     }
 
     /**
@@ -396,12 +398,48 @@ abstract contract BasicSwap7683 is Base7683 {
 
         address outputToken = TypeCasts.bytes32ToAddress(orderData.outputToken);
         address recipient = TypeCasts.bytes32ToAddress(orderData.recipient);
+        if(orderData.action == uint8(OrderAction.TRANSFER)){
+            if (outputToken == address(0)) {
+                if (orderData.amountOut != msg.value) revert InvalidNativeAmount();
+                Address.sendValue(payable(recipient), orderData.amountOut);
+            } else {
+                IERC20(outputToken).safeTransferFrom(msg.sender, recipient, orderData.amountOut);
+            }
+        }else if (orderData.action == uint8(OrderAction.SWAP)){
+            if (_localDomain() == 421614 && outputToken != address(0)) {
+                IERC20(outputToken).safeTransferFrom(msg.sender, address(this), orderData.amountOut);
+                uint256 balanceBefore = IERC20(outputToken).balanceOf(address(this));
+                // Do the swap here using the local router
+                uint256 balanceAfter = IERC20(outputToken).balanceOf(address(this));
+                uint256 swapReceived = balanceAfter - balanceBefore;
+                OrderData memory orderDataNew = OrderData(
+                    TypeCasts.addressToBytes32(msg.sender),
+                    orderData.recipient,
+                    orderData.targetInputToken,
+                    orderData.targetOutputToken,
+                    TypeCasts.addressToBytes32(address(0)),
+                    TypeCasts.addressToBytes32(address(0)),
+                    swapReceived,
+                    swapReceived,
+                    orderData.destinationDomain,
+                    orderData.originDomain,
+                    orderData.sourceSettler,
+                    orderData.destinationSettler,
+                    type(uint32).max,
+                    uint8(OrderAction.TRANSFER),
+                    new bytes(0)
+                );
 
-        if (outputToken == address(0)) {
-            if (orderData.amountOut != msg.value) revert InvalidNativeAmount();
-            Address.sendValue(payable(recipient), orderData.amountOut);
-        } else {
-            IERC20(outputToken).safeTransferFrom(msg.sender, recipient, orderData.amountOut);
+                OnchainCrossChainOrder memory onchainOrder =
+                OnchainCrossChainOrder(type(uint32).max, OrderEncoder.orderDataType(), OrderEncoder.encode(orderDataNew));
+
+                (ResolvedCrossChainOrder memory resolvedOrder, bytes32 orderId,) = _resolveOrder(onchainOrder);
+                openOrders[orderId] = abi.encode(OrderEncoder.orderDataType(), onchainOrder.orderData);
+                orderStatus[orderId] = OPENED;
+                // _useNonce(recipient, nonce);
+
+                emit Open(orderId, resolvedOrder);
+            }
         }
     }
 
