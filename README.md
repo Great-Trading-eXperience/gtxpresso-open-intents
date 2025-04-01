@@ -1,109 +1,131 @@
-<p align="center">
-    <a href="https://www.openintents.xyz/" target="_blank" title="Open Intents Framework home">
-      <img src="https://www.bootnode.dev/external/github-headers/oif.png" alt="open intents framework banner">
-    </a>
-</p>
+# GTXpresso - Cross-Chain CLOB DEX
 
-<div align="center"><strong>Intents For Everyone, With Everyone</strong></div>
-<div align="center">A modular, open-source framework for permissionless, scalable intent execution.</div>
-<br />
+GTXpresso is a **cross-chain Central Limit Order Book (CLOB) decentralized exchange** powered by **Espresso**, leveraging its cutting-edge rollup technology for **sequencing, interoperability, and trading efficiency**.
 
-# Open Intents Framework
+## 🚀 Overview
 
-[![License: MIT][license-badge]][license]
+GTXpresso utilizes **Espresso's high-performance rollup infrastructure** to enable **decentralized, low-cost, and cross-chain** trading. Built with the **Open Intents Framework**, it supports **intent-based trading across EVM-compatible chains**, ensuring secure and efficient execution.
 
-[license]: https://www.apache.org/licenses/LICENSE-2.0
-[license-badge]: https://img.shields.io/badge/License-Apache-blue.svg
+With **ERC-7683 support**, GTXpresso facilitates **standardized cross-chain transactions**, allowing seamless intent activation across the Ethereum ecosystem.
 
-## Description
+## 🔑 Key Components
 
-The Open Intents Framework is an open-source framework that provides a full stack of smart contracts, solvers and UI with modular abstractions for settlement to build and deploy intent protocols across EVM chains.
+### 1️⃣ CLOB Contracts
 
-With out-of-the-box ERC-7683 support, the Open Intents Framework standardizes cross-chain transactions and unlocks intents on day 1 for builders in the whole Ethereum ecosystem (and beyond).
+- **Deployed on an Espresso-powered rollup** for efficient order placement, matching, and settlement.
 
-## Features
+### 2️⃣ Espresso-Powered Rollup
 
-- **ERC-7683 Reference Implementation:** Standardizes cross-chain intent execution, making transactions more interoperable and predictable across EVM chains.
-- **Open-Source Reference Solver:** application that provides customizable protocol-independent features—such as indexing, transaction submission, and rebalancing.
-- **Composable Smart Contracts:** composable framework where developers can mix and match smart contracts, solvers, and settlement layers to fit their use case
-- **Ready-to-Use UI:** A pre-built, customizable UI template that makes intents accessible to end users.
-- **Credibly Neutral:** works across different intent-based protocols and settlement mechanisms
+- **Arbitrum Orbit L3 rollup** utilizing **Espresso's shared sequencing** for enhanced trading performance.
+- **Parent Chain:** Arbitrum Sepolia
+- Built on **Arbitrum Nitro**, integrating **Espresso confirmations** for improved sequencing and interoperability.
+- Optimized for **high-speed, low-cost transactions**.
 
-## Directory Structure
+### 3️⃣ Hyperlane Bridge Mechanism
 
-- `solidity/` - Contains the smart contract code written in Solidity.
-- `typescript/solvers/` - Houses the TypeScript implementations of the solvers that execute the intents.
+- **Core and Warp Routes** deployed for cross-chain message passing and liquidity bridging.
+- Enables **secure and efficient** asset movement across chains.
 
-## Getting Started
+### 4️⃣ Open Intents Contracts
 
-### Prerequisites
+- Implements **ERC-7683-based contracts** for **on-chain intent creation and settlement**.
+- Facilitates seamless execution using **Hyperlane's messaging infrastructure**.
 
-- Node.js
-- yarn
-- Git
+### 5️⃣ Solver
 
-### Installation
+- **Off-chain solver node** that listens for new intents on the rollup.
+- **Executes orders** on destination chains based on user-defined actions.
 
-```bash
-git clone https://github.com/BootNodeDev/intents-framework.git
-cd intents-framework
-yarn
-```
+## ⚡ The Problem
 
-### Running the Solver
+On-chain trading still faces key challenges:
 
-Run the following commands from the root directory (you need `docker` installed)
+- **High Gas Costs** – While rollups reduce fees, active trading remains costly.
+- **Execution Bottlenecks** – Many rollups rely on centralized sequencers, causing delays and reordering risks.
+- **Liquidity Fragmentation** – Liquidity remains siloed across different rollups, making cross-rollup trading inefficient.
 
-```bash
-docker build -t solver .
-```
+## 🌟 Why Espresso?
 
-Once it finish building the image
+Espresso **solves these issues** by offering:
 
-```bash
-docker run -it -e [PRIVATE_KEY=SOME_PK_YOU_OWN | MNEMONIC=SOME_MNEMONIC_YOU_OWN] solver
-```
+- ✅ **Decentralized & Shared Sequencing** – Removes centralized sequencers for **fair & transparent** transaction ordering.
+- ⚡ **Low Latency** – Faster block times enable **near-instant execution**, crucial for high-frequency trading.
+- 💰 **Lower Costs** – Transactions are **significantly cheaper** than L1s and traditional L2s.
+- 🔄 **Cross-Chain Liquidity** – Seamless integration with **Hyperlane** enables **frictionless multi-chain trading**.
+- 🚀 **Optimized Trading Infrastructure** – Advanced sequencing mechanisms tailored for **high-performance decentralized trading**.
 
-The solver is run using `pm2` inside the docker container so `pm2` commands can still be used inside a container with the docker exec command:
+## 🔍 How GTXpresso Enables Cross-Chain Trading
 
-```bash
-# Monitoring CPU/Usage of each process
-docker exec -it <container-id> pm2 monit
-# Listing managed processes
-docker exec -it <container-id> pm2 list
-# Get more information about a process
-docker exec -it <container-id> pm2 show
-# 0sec downtime reload all applications
-docker exec -it <container-id> pm2 reload all
-```
+### 🛠️ Key Technologies
 
-### Running the Solidity Script
+1️⃣ **Hyperlane Interoperability**
 
-If you want to try running the Solidity script, navigate to the `solidity` folder and execute the following commands:
+- **Warp Routes** enable direct messaging between **Arbitrum Sepolia & GTXpresso**.
+- **Mailbox contracts** ensure **secure & reliable** cross-chain message passing.
 
-```bash
-# Navigate to the solidity folder
-cd solidity
+2️⃣ **Espresso's Decentralized Sequencing**
 
-# Run the DeploySimple script
-yarn run:deploySimple
+- Fair transaction ordering across chains without centralized control.
+- **Synchronized execution** of cross-chain trades.
 
-# Run the OpenOrder script
-yarn run:openOrder
-```
+3️⃣ **Open Intents Framework (ERC-7683)**
 
-Ensure that the environment variables required by the script are properly configured
+- Standardized intent execution across chains.
+- **Off-chain solvers** optimize order fulfillment for efficiency.
 
-### Versioning
+4️⃣ **Dedicated L3 Rollup for Trading**
 
-For the versions available, see the tags on this repository.
+- **Arbitrum Orbit + Espresso** for **high-speed execution & reduced costs**.
+- Built specifically for **cross-chain liquidity aggregation**.
 
-### Releasing packages to NPM
+## 📌 Deployments
 
-We use [changesets](https://github.com/changesets/changesets) to release to NPM. You can use the `release` script in `package.json` to publish.
+### 1️⃣ Rollup Deployment
 
-Currently the only workspace being released as an NPM package is the one in `solidity`, which contains the contracts and typechain artifacts.
+- **Chain Name:** `GTXpresso`
+- **Chain Slug:** `gtxpresso`
+- **Chain ID:** `1020201`
+- **RPC URL:** [GTXpresso RPC](http://157.173.201.26:8547)
+- **CreateRollup TX:** [View on Arbiscan](https://sepolia.arbiscan.io/tx/0x80768de7eb5f18f567a7d7ad3d6cbe45d40272d34126e754aa775171c1112980)
 
-### License
+### 2️⃣ Hyperlane Deployment
 
-This project is licensed under the Apache 2.0 License - see the LICENSE.md file for details.
+- **Core Deployments:**
+  - [Arbitrum Sepolia](hyperlane/chains/arbitrumsepolia/addresses.yaml)
+  - [GTXpresso](hyperlane/chains/gtxpresso/addresses.yaml)
+- **Warp Routes:**
+  - [Arbitrum Sepolia - GTXpresso](hyperlane/deployments/warp_routes)
+
+### 3️⃣ Open Intents Framework Deployment
+
+- **Router Deployments:**
+  - **Arbitrum Sepolia**: `0x87c7Dfd251B2DCfA7aA5E3d117b10009e0f7d770`
+  - **GTXpresso**: `0x9EC1bC024132cA18AFC6da7395B7121b73C5E01E`
+
+### 4️⃣ ERC20 Token Addresses
+
+#### 🔹 Arbitrum Sepolia
+
+- **WETH:** `0x552256420C00844F77DB871b887A635525cf6840`
+- **WBTC:** `0xaFDc3DE41a8D3dD69e35e401BF5505C8A7F5041A`
+- **USDC:** `0x1EEC8DA99e0a34481A4b364AF4740C8AC2FF5BC5`
+- **TRUMP:** `0xA89EA4eF4cbBCC4cFFd3Dc95D279Ee05054E499e`
+- **PEPE:** `0x148666827538984Ad99dDA444EcB216BdaCB6Dbe`
+- **LINK:** `0xdeBFCB6A900635aea9C6BF01e0B303a02A4BFb82`
+- **DOGE:** `0xC50144b9B0284153f1C8660f6381c3DD2D69F1b5`
+
+#### 🔸 GTXpresso
+
+- **USDC:** `0xe76CC28AaF7Fb2b778f05392Fd0a668A161F57f7`
+- **WETH:** `0xd786Baf47F03c9b6746f4AB73736a3155F773a0f`
+- **WBTC:** `0x0a96BeFe6dDf44F8905E3A7E4dC78aA95C0f9327`
+- **DOGE:** `0x3CfA285c5Cc69252093A5a2859869489D5A63650`
+- **LINK:** `0x13378548Fef28F9C17D2B721C41C7796A740266d`
+- **TRUMP:** `0x6F199125B610A34F3a9A02c24416EAB4Ac1d46F6`
+
+## 🛠️ Tech Stack & References
+
+- **Espresso:** [Espresso Network](https://docs.espressosys.com/network)
+- **Hyperlane:** [Hyperlane](https://hyperlane.xyz/)
+- **Open Intents:** [Open Intents](https://www.openintents.xyz/)
+- **Arbitrum Nitro:** [Arbitrum](https://arbitrum.io/)
