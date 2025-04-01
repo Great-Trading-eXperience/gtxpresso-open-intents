@@ -32,6 +32,7 @@ contract OpenOrder is Script {
         uint8 orderAction = uint8(vm.envUint("ORDER_ACTION"));
         uint32 originDomain = Hyperlane7683(localRouter).localDomain();
         uint256 destinationDomain = vm.envUint("DESTINATION_DOMAIN");
+        uint256 targetDomain = vm.envUint("TARGET_DOMAIN");
         uint32 fillDeadline = type(uint32).max;
 
         if (inputToken != address(0)) {
@@ -49,6 +50,7 @@ contract OpenOrder is Script {
             amountOut,
             originDomain,
             uint32(destinationDomain),
+            uint32(targetDomain),
             TypeCasts.addressToBytes32(destinationRouter),
             TypeCasts.addressToBytes32(localRouter),
             fillDeadline,

@@ -28,10 +28,12 @@ struct PoolKey {
 type PoolId is bytes32;
 
 interface IGTXRouter {
-    function placeMarketOrder(
-        PoolKey calldata key,
-        Quantity quantity,
-        Side side,
+    function swap(
+        Currency srcCurrency,
+        Currency dstCurrency,
+        uint256 srcAmount,
+        uint256 minDstAmount,
+        uint8 maxHops,
         address user
-    ) external returns (OrderId orderId);
+    ) external returns (uint256 receivedAmount);
 }
