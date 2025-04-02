@@ -164,9 +164,9 @@ Espresso **solves these issues** by offering:
 
 ## 🔗 Relevant Links
 
-[Video Demo](https://drive.google.com/drive/folders/1lVks0fOD2_bt1QYrojlcTZIeEN9i-qKY)
-[Video Docker Logs](https://youtu.be/CP5wdnj7exQ)
-[Presentation](https://www.canva.com/design/DAGjaqBGVzQ/UZ_yJjH-a2yoWvPgvPVTig/view)
+- [Video Demo](https://drive.google.com/drive/folders/1lVks0fOD2_bt1QYrojlcTZIeEN9i-qKY)
+- [Video Docker Logs](https://youtu.be/CP5wdnj7exQ)
+- [Presentation](https://www.canva.com/design/DAGjaqBGVzQ/UZ_yJjH-a2yoWvPgvPVTig/view)
 
 ## 🛠️ Tech Stack & References
 
