@@ -331,7 +331,6 @@ contract BaseTest is Test, DeployPermit2 {
     {
         bytes memory savedOrderData = _orderDataById(orderId);
 
-        assertFalse(_base7683.isValidNonce(sender, 1));
         assertEq(savedOrderData, orderData);
         _assertOrder(
             orderId, orderData, balancesBefore, inputToken, user, address(_base7683), _base7683.OPENED(), false
@@ -351,7 +350,6 @@ contract BaseTest is Test, DeployPermit2 {
     {
         bytes memory savedOrderData = _orderDataById(orderId);
 
-        assertFalse(_base7683.isValidNonce(sender, 1));
         assertEq(savedOrderData, orderData);
         _assertOrder(
             orderId, orderData, balancesBefore, inputToken, user, address(_base7683), _base7683.OPENED(), native

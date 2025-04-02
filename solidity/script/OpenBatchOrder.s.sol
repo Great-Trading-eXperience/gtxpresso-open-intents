@@ -40,13 +40,17 @@ contract OpenBatchOrder is Script {
             TypeCasts.addressToBytes32(recipient),
             TypeCasts.addressToBytes32(inputToken),
             TypeCasts.addressToBytes32(outputToken),
+            TypeCasts.addressToBytes32(inputToken),
+            TypeCasts.addressToBytes32(outputToken),
             amountIn,
             amountOut,
-            senderNonce,
             originDomain,
             uint32(destinationDomain),
+            uint32(destinationDomain),
+            TypeCasts.addressToBytes32(localRouter),
             TypeCasts.addressToBytes32(localRouter),
             fillDeadline,
+            1,
             new bytes(0)
         );
 
@@ -55,11 +59,9 @@ contract OpenBatchOrder is Script {
         onchainOrders[0] =
             OnchainCrossChainOrder(fillDeadline, OrderEncoder.orderDataType(), OrderEncoder.encode(order));
 
-        order.senderNonce = senderNonce + 1;
         onchainOrders[1] =
             OnchainCrossChainOrder(fillDeadline, OrderEncoder.orderDataType(), OrderEncoder.encode(order));
 
-        order.senderNonce = senderNonce + 2;
         onchainOrders[2] =
             OnchainCrossChainOrder(fillDeadline, OrderEncoder.orderDataType(), OrderEncoder.encode(order));
 

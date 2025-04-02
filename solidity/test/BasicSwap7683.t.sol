@@ -171,13 +171,17 @@ contract BasicSwap7683Test is BaseTest {
             recipient: TypeCasts.addressToBytes32(karpincho),
             inputToken: TypeCasts.addressToBytes32(address(inputToken)),
             outputToken: TypeCasts.addressToBytes32(address(outputToken)),
+            targetInputToken: TypeCasts.addressToBytes32(address(inputToken)),
+            targetOutputToken: TypeCasts.addressToBytes32(address(outputToken)),
             amountIn: amount,
             amountOut: amount,
-            senderNonce: 1,
             originDomain: origin,
             destinationDomain: destination,
+            targetDomain: destination,
             destinationSettler: counterpart.addressToBytes32(),
+            sourceSettler: counterpart.addressToBytes32(),
             fillDeadline: uint32(block.timestamp + 100),
+            action: 1,
             data: new bytes(0)
         });
     }

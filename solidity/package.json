@@ -72,7 +72,7 @@
     "run:deployBatchOpen": "dotenv-run-script deployBatchOpen",
     "openBatchOrder": "forge script script/OpenBatchOrder.s.sol:OpenBatchOrder -f $NETWORK --broadcast --verify --slow -vvv",
     "run:openBatchOrder": "dotenv-run-script openBatchOrder",
-    "enrollRouter": "forge script script/EnrollRouter.s.sol:EnrollRouter -f arbitrum-sepolia --broadcast --slow -vvv",
+    "enrollRouter": "forge script script/EnrollRouter.s.sol:EnrollRouter -f http://157.173.201.26:8547 --broadcast --slow -vvv",
     "run:enrollRouter": "dotenv-run-script enrollRouter",
     "upgradeSimple": "forge script script/UpgradeSimple.s.sol:UpgradeSimple -f $NETWORK --broadcast --slow -vvv",
     "run:upgradeSimple": "dotenv-run-script upgradeSimple",

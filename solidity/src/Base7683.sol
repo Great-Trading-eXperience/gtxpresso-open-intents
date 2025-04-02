@@ -71,6 +71,9 @@ abstract contract Base7683 is IOriginSettler, IDestinationSettler {
     /// @notice Tracks the status of each order by its ID.
     mapping(bytes32 orderId => bytes32 status) public orderStatus;
 
+    /// @notice Tracks the status of each order by its ID.
+    uint256 public lastNonce;
+
     // ============ Upgrade Gap ============
     /// @dev Reserved space for future storage variables to ensure upgradeability.
     uint256[47] private __GAP;
@@ -183,7 +186,8 @@ abstract contract Base7683 is IOriginSettler, IDestinationSettler {
         }
 
         if (msg.value != totalValue) revert InvalidNativeAmount();
-
+        
+        lastNonce++;
         emit Open(orderId, resolvedOrder);
     }
 

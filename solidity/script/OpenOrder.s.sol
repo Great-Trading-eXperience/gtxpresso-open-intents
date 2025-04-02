@@ -38,6 +38,7 @@ contract OpenOrder is Script {
         if (inputToken != address(0)) {
             ERC20(inputToken).approve(localRouter, amountIn);
         }
+        uint256 lastNonce = Hyperlane7683(localRouter).lastNonce();
 
         OrderData memory order = OrderData(
             TypeCasts.addressToBytes32(sender),
@@ -55,6 +56,7 @@ contract OpenOrder is Script {
             TypeCasts.addressToBytes32(localRouter),
             fillDeadline,
             orderAction,
+            lastNonce + 1,
             new bytes(0)
         );
 

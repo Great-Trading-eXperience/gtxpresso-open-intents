@@ -295,7 +295,6 @@ contract Base7683Test is BaseTest {
         vm.startPrank(kakaroto);
         inputToken.approve(address(base), amount);
 
-        assertTrue(base.isValidNonce(kakaroto, 1));
         uint256[] memory balancesBefore = _balances(inputToken);
 
         vm.recordLogs();
@@ -328,7 +327,6 @@ contract Base7683Test is BaseTest {
 
         vm.startPrank(kakaroto);
 
-        assertTrue(base.isValidNonce(kakaroto, 1));
         uint256[] memory balancesBefore = _balances();
 
         vm.recordLogs();
@@ -359,8 +357,6 @@ contract Base7683Test is BaseTest {
         OnchainCrossChainOrder memory order = _prepareOnchainOrder(orderData, _fillDeadline, "someOrderType");
 
         vm.startPrank(kakaroto);
-
-        base.invalidateNonces(1);
 
         vm.expectRevert(Base7683.InvalidNonce.selector);
         base.open(order);
@@ -398,7 +394,6 @@ contract Base7683Test is BaseTest {
         vm.startPrank(karpincho);
         // inputToken.approve(address(base), amount);
 
-        assertTrue(base.isValidNonce(kakaroto, 1));
         uint256[] memory balancesBefore = _balances(inputToken);
 
         vm.recordLogs();
@@ -486,7 +481,6 @@ contract Base7683Test is BaseTest {
         GaslessCrossChainOrder memory order = _prepareGaslessOrder(orderData, permitNonce, _openDeadline, _fillDeadline);
 
         vm.startPrank(kakaroto);
-        base.invalidateNonces(1);
         vm.stopPrank();
 
         bytes memory sig = new bytes(0);

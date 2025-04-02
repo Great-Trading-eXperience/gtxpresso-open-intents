@@ -432,6 +432,7 @@ abstract contract BasicSwap7683 is Base7683 {
                         orderData.destinationSettler,
                         type(uint32).max,
                         uint8(OrderAction.TRANSFER),
+                        orderData.nonce + 1,
                         new bytes(0)
                     );
                     

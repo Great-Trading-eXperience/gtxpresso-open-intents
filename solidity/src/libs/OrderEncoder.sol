@@ -17,6 +17,7 @@ struct OrderData {
     bytes32 sourceSettler;
     uint32 fillDeadline;
     uint8 action;
+    uint256 nonce;
     bytes data;
 }
 
@@ -38,6 +39,7 @@ library OrderEncoder {
         "bytes32 sourceSettler,",
         "uint32 fillDeadline,",
         "uint8 action,",
+        "uint256 nonce,",
         "bytes data)"
     );
 
