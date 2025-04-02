@@ -8,6 +8,7 @@ import { TypeCasts } from "@hyperlane-xyz/libs/TypeCasts.sol";
 
 import { Base7683 } from "./Base7683.sol";
 import { OrderData, OrderEncoder } from "./libs/OrderEncoder.sol";
+import {IGTXRouter, Currency} from "./IGTXRouter.sol";
 
 import {
     GaslessCrossChainOrder,
@@ -31,6 +32,8 @@ abstract contract BasicSwap7683 is Base7683 {
     // ============ Libraries ============
     using SafeERC20 for IERC20;
 
+    // =========== Enum ============
+    enum OrderAction { TRANSFER, SWAP }
     // ============ Constants ============
     /// @notice Status constant indicating that an order has been settled.
     bytes32 public constant SETTLED = "SETTLED";
@@ -38,6 +41,8 @@ abstract contract BasicSwap7683 is Base7683 {
     bytes32 public constant REFUNDED = "REFUNDED";
 
     // ============ Public Storage ============
+    address public GTX_ROUTER_ADDRESS;
+    address public GTX_BALANCE_MANAGER_ADDRESS;
 
     // ============ Upgrade Gap ============
     /// @dev Reserved storage slots for upgradeability.
@@ -378,7 +383,7 @@ abstract contract BasicSwap7683 is Base7683 {
             fillInstructions: fillInstructions
         });
 
-        nonce = orderData.senderNonce;
+        // nonce = orderData.senderNonce;
     }
 
     /**
@@ -396,14 +401,87 @@ abstract contract BasicSwap7683 is Base7683 {
 
         address outputToken = TypeCasts.bytes32ToAddress(orderData.outputToken);
         address recipient = TypeCasts.bytes32ToAddress(orderData.recipient);
+        if(orderData.action == uint8(OrderAction.TRANSFER)){
+            if (outputToken == address(0)) {
+                if (orderData.amountOut != msg.value) revert InvalidNativeAmount();
+                Address.sendValue(payable(recipient), orderData.amountOut);
+            } else {
+                IERC20(outputToken).safeTransferFrom(msg.sender, recipient, orderData.amountOut);
+            }
+        }else if (orderData.action == uint8(OrderAction.SWAP)){
+            if (_localDomain() == 1020201 && outputToken != address(0)) {
+                address _outputSwapToken = TypeCasts.bytes32ToAddress(orderData.targetInputToken);
+                uint256 swapReceived = _gtxSwap(outputToken, _outputSwapToken, orderData.amountOut);
+                if (orderData.targetDomain == _localDomain()) {
+                    IERC20(_outputSwapToken).safeTransfer(TypeCasts.bytes32ToAddress(orderData.recipient), swapReceived);
+                } else {
+                    IERC20(_outputSwapToken).safeTransfer(msg.sender, swapReceived);
+                    OrderData memory orderDataNew = OrderData(
+                        TypeCasts.addressToBytes32(msg.sender),
+                        orderData.recipient,
+                        orderData.targetInputToken,
+                        orderData.targetOutputToken,
+                        TypeCasts.addressToBytes32(address(0)),
+                        TypeCasts.addressToBytes32(address(0)),
+                        swapReceived,
+                        swapReceived,
+                        orderData.destinationDomain,
+                        orderData.targetDomain,
+                        0, // this is not used on the target domain
+                        orderData.sourceSettler,
+                        orderData.destinationSettler,
+                        type(uint32).max,
+                        uint8(OrderAction.TRANSFER),
+                        orderData.nonce + 1,
+                        new bytes(0)
+                    );
+                    
+                    OnchainCrossChainOrder memory onchainOrder =
+                    OnchainCrossChainOrder(type(uint32).max, OrderEncoder.orderDataType(), OrderEncoder.encode(orderDataNew));
 
-        if (outputToken == address(0)) {
-            if (orderData.amountOut != msg.value) revert InvalidNativeAmount();
-            Address.sendValue(payable(recipient), orderData.amountOut);
-        } else {
-            IERC20(outputToken).safeTransferFrom(msg.sender, recipient, orderData.amountOut);
+                    (ResolvedCrossChainOrder memory resolvedOrder, bytes32 orderId,) = _resolveOrder(onchainOrder);
+                    openOrders[orderId] = abi.encode(OrderEncoder.orderDataType(), onchainOrder.orderData);
+                    orderStatus[orderId] = OPENED;
+                    // _useNonce(recipient, nonce);
+
+                    emit Open(orderId, resolvedOrder);
+                }
+            }
         }
     }
+
+    /**
+     * @dev Swaps tokens using the GTX router.
+     * @param _inputToken The address of the input token.
+     * @param _outputToken The address of the output token.
+     * @param _swapAmount The amount to swap.
+     * @return swapReceived The amount received from the swap.
+     */
+    function _gtxSwap(address _inputToken, address _outputToken, uint256 _swapAmount) internal returns (uint256) {
+        IERC20(_inputToken).safeTransferFrom(msg.sender, address(this), _swapAmount);
+        IERC20(_inputToken).approve(GTX_BALANCE_MANAGER_ADDRESS, _swapAmount);
+        uint256 _receiveAmount = IGTXRouter(GTX_ROUTER_ADDRESS).swap(
+            Currency.wrap(_inputToken),
+            Currency.wrap(_outputToken),
+            _swapAmount,
+            1e8,
+            2,
+            address(this)
+        );
+        return _receiveAmount;
+    }
+
+    /**
+     * @dev Sets the address of the GTX router.
+     * @param _gtxRouterAddress The address of the GTX router.
+     */
+    function setGtxRouterAddress(address _gtxRouterAddress) external virtual;
+
+    /**
+     * @dev Sets the address of the GTX balance manager.
+     * @param _gtxBalanceManagerAddress The address of the GTX balance manager.
+     */
+    function setGtxBalanceManagerAddress(address _gtxBalanceManagerAddress) external virtual;
 
     /**
      * @dev Should be implemented by the messaging layer for dispatching a settlement instruction the remote domain

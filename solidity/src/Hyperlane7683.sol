@@ -119,4 +119,16 @@ contract Hyperlane7683 is GasRouter, BasicSwap7683 {
     function _localDomain() internal view override returns (uint32) {
         return localDomain;
     }
+
+    /**
+     * @notice Sets the address of the GTX router.
+     * @param _gtxRouter The address of the GTX router contract.
+     */
+    function setGtxRouterAddress(address _gtxRouter) external override onlyOwner {
+        GTX_ROUTER_ADDRESS = _gtxRouter;
+    }
+    
+    function setGtxBalanceManagerAddress(address _gtxBalanceManager) external override onlyOwner {
+        GTX_BALANCE_MANAGER_ADDRESS = _gtxBalanceManager;
+    }
 }

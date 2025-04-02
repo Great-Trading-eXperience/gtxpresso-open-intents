@@ -25,29 +25,38 @@ contract OpenOrder is Script {
         address recipient = vm.envAddress("ORDER_RECIPIENT");
         address inputToken = vm.envAddress("ITT_INPUT");
         address outputToken = vm.envAddress("ITT_OUTPUT");
+        address targetInputToken = vm.envAddress("TG_INPUT");
+        address targetOutputToken = vm.envAddress("TG_OUTPUT");
         uint256 amountIn = vm.envUint("AMOUNT_IN");
         uint256 amountOut = vm.envUint("AMOUNT_OUT");
-        uint256 senderNonce = vm.envUint("SENDER_NONCE");
+        uint8 orderAction = uint8(vm.envUint("ORDER_ACTION"));
         uint32 originDomain = Hyperlane7683(localRouter).localDomain();
         uint256 destinationDomain = vm.envUint("DESTINATION_DOMAIN");
+        uint256 targetDomain = vm.envUint("TARGET_DOMAIN");
         uint32 fillDeadline = type(uint32).max;
 
         if (inputToken != address(0)) {
             ERC20(inputToken).approve(localRouter, amountIn);
         }
+        uint256 lastNonce = Hyperlane7683(localRouter).lastNonce();
 
         OrderData memory order = OrderData(
             TypeCasts.addressToBytes32(sender),
             TypeCasts.addressToBytes32(recipient),
             TypeCasts.addressToBytes32(inputToken),
             TypeCasts.addressToBytes32(outputToken),
+            TypeCasts.addressToBytes32(targetInputToken),
+            TypeCasts.addressToBytes32(targetOutputToken),
             amountIn,
             amountOut,
-            senderNonce,
             originDomain,
             uint32(destinationDomain),
+            uint32(targetDomain),
             TypeCasts.addressToBytes32(destinationRouter),
+            TypeCasts.addressToBytes32(localRouter),
             fillDeadline,
+            orderAction,
+            lastNonce + 1,
             new bytes(0)
         );
 

@@ -22,7 +22,7 @@ contract OwnableProxyAdmin is ProxyAdmin {
 /// @dev See the Solidity Scripting tutorial: https://book.getfoundry.sh/tutorials/solidity-scripting
 contract DeploySimple is Script {
     function run() public {
-        uint256 deployerPrivateKey = vm.envUint("DEPLOYER_PK");
+        uint256 deployerPrivateKey = vm.envUint("HYP_KEY");
 
         // address owner = vm.envAddress("ROUTER_OWNER");
 

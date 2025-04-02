@@ -71,6 +71,9 @@ abstract contract Base7683 is IOriginSettler, IDestinationSettler {
     /// @notice Tracks the status of each order by its ID.
     mapping(bytes32 orderId => bytes32 status) public orderStatus;
 
+    /// @notice Tracks the status of each order by its ID.
+    uint256 public lastNonce;
+
     // ============ Upgrade Gap ============
     /// @dev Reserved space for future storage variables to ensure upgradeability.
     uint256[47] private __GAP;
@@ -144,19 +147,19 @@ abstract contract Base7683 is IOriginSettler, IDestinationSettler {
         external
         virtual
     {
-        if (block.timestamp > _order.openDeadline) revert OrderOpenExpired();
-        if (_order.originSettler != address(this)) revert InvalidGaslessOrderSettler();
-        if (_order.originChainId != _localDomain()) revert InvalidGaslessOrderOrigin();
+        // if (block.timestamp > _order.openDeadline) revert OrderOpenExpired();
+        // if (_order.originSettler != address(this)) revert InvalidGaslessOrderSettler();
+        // if (_order.originChainId != _localDomain()) revert InvalidGaslessOrderOrigin();
 
-        (ResolvedCrossChainOrder memory resolvedOrder, bytes32 orderId, uint256 nonce) = _resolveOrder(_order, _originFillerData);
+        // (ResolvedCrossChainOrder memory resolvedOrder, bytes32 orderId,) = _resolveOrder(_order, _originFillerData);
 
-        openOrders[orderId] = abi.encode(_order.orderDataType, _order.orderData);
-        orderStatus[orderId] = OPENED;
-        _useNonce(_order.user, nonce);
+        // openOrders[orderId] = abi.encode(_order.orderDataType, _order.orderData);
+        // orderStatus[orderId] = OPENED;
+        // // _useNonce(_order.user, nonce);
 
-        _permitTransferFrom(resolvedOrder, _signature, _order.nonce, address(this));
+        // _permitTransferFrom(resolvedOrder, _signature, _order.nonce, address(this));
 
-        emit Open(orderId, resolvedOrder);
+        // emit Open(orderId, resolvedOrder);
     }
 
     /**
@@ -166,11 +169,11 @@ abstract contract Base7683 is IOriginSettler, IDestinationSettler {
      * @param _order The OnchainCrossChainOrder definition
      */
     function open(OnchainCrossChainOrder calldata _order) external payable virtual {
-        (ResolvedCrossChainOrder memory resolvedOrder, bytes32 orderId, uint256 nonce) = _resolveOrder(_order);
+        (ResolvedCrossChainOrder memory resolvedOrder, bytes32 orderId, ) = _resolveOrder(_order);
 
         openOrders[orderId] = abi.encode(_order.orderDataType, _order.orderData);
         orderStatus[orderId] = OPENED;
-        _useNonce(msg.sender, nonce);
+        // _useNonce(msg.sender, nonce);
 
         uint256 totalValue;
         for (uint256 i = 0; i < resolvedOrder.minReceived.length; i++) {
@@ -183,7 +186,8 @@ abstract contract Base7683 is IOriginSettler, IDestinationSettler {
         }
 
         if (msg.value != totalValue) revert InvalidNativeAmount();
-
+        
+        lastNonce++;
         emit Open(orderId, resolvedOrder);
     }
 
@@ -311,11 +315,11 @@ abstract contract Base7683 is IOriginSettler, IDestinationSettler {
      * @notice Invalidates a nonce for the user calling the function.
      * @param _nonce The nonce to invalidate.
      */
-    function invalidateNonces(uint256 _nonce) external virtual {
-        _useNonce(msg.sender, _nonce);
+    // function invalidateNonces(uint256 _nonce) external virtual {
+    //     _useNonce(msg.sender, _nonce);
 
-        emit NonceInvalidation(msg.sender, _nonce);
-    }
+    //     emit NonceInvalidation(msg.sender, _nonce);
+    // }
 
     /**
      * @notice Checks whether a given nonce is valid.
@@ -323,9 +327,9 @@ abstract contract Base7683 is IOriginSettler, IDestinationSettler {
      * @param _nonce The nonce to check.
      * @return isValid True if the nonce is valid, false otherwise.
      */
-    function isValidNonce(address _from, uint256 _nonce) external view virtual returns (bool) {
-        return !usedNonces[_from][_nonce];
-    }
+    // function isValidNonce(address _from, uint256 _nonce) external view virtual returns (bool) {
+    //     return !usedNonces[_from][_nonce];
+    // }
 
     // ============ Public Functions ============
 
@@ -358,10 +362,10 @@ abstract contract Base7683 is IOriginSettler, IDestinationSettler {
      * @param _from The address for which the nonce is being used.
      * @param _nonce The nonce to mark as used.
      */
-    function _useNonce(address _from, uint256 _nonce) internal {
-        if (usedNonces[_from][_nonce]) revert InvalidNonce();
-        usedNonces[_from][_nonce] = true;
-    }
+    // function _useNonce(address _from, uint256 _nonce) internal {
+    //     if (usedNonces[_from][_nonce]) revert InvalidNonce();
+    //     usedNonces[_from][_nonce] = true;
+    // }
 
     /**
      * @notice Executes a batch token transfer using the Permit2 `permitWitnessTransferFrom` method.

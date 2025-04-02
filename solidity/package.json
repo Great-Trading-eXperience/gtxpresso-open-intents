@@ -66,7 +66,7 @@
     "run:deploySimple": "dotenv-run-script deploySimple",
     "deployToken": "forge script script/DeployToken.s.sol:DeployToken -f $NETWORK --broadcast --verify --slow -vvv",
     "run:deployToken": "dotenv-run-script deployToken",
-    "openOrder": "forge script script/OpenOrder.s.sol:OpenOrder -f $NETWORK --broadcast --verify --slow -vvv",
+    "openOrder": "forge script script/OpenOrder.s.sol:OpenOrder -f $NETWORK --broadcast --slow -vvv",
     "run:openOrder": "dotenv-run-script openOrder",
     "deployBatchOpen": "forge script script/DeployBatchOpen.s.sol:DeployBatchOpen -f $NETWORK --broadcast --verify --slow -vvv",
     "run:deployBatchOpen": "dotenv-run-script deployBatchOpen",

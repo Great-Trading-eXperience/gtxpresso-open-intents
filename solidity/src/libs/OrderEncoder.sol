@@ -6,13 +6,18 @@ struct OrderData {
     bytes32 recipient;
     bytes32 inputToken;
     bytes32 outputToken;
+    bytes32 targetInputToken;
+    bytes32 targetOutputToken;
     uint256 amountIn;
     uint256 amountOut;
-    uint256 senderNonce;
     uint32 originDomain;
     uint32 destinationDomain;
+    uint32 targetDomain;
     bytes32 destinationSettler;
+    bytes32 sourceSettler;
     uint32 fillDeadline;
+    uint8 action;
+    uint256 nonce;
     bytes data;
 }
 
@@ -23,13 +28,18 @@ library OrderEncoder {
         "bytes32 recipient,",
         "bytes32 inputToken,",
         "bytes32 outputToken,",
+        "bytes32 targetInputToken",
+        "bytes32 targetOutputToken",
         "uint256 amountIn,",
         "uint256 amountOut,",
-        "uint256 senderNonce,",
         "uint32 originDomain,",
         "uint32 destinationDomain,",
+        "uint32 targetDomain,",
         "bytes32 destinationSettler,",
+        "bytes32 sourceSettler,",
         "uint32 fillDeadline,",
+        "uint8 action,",
+        "uint256 nonce,",
         "bytes data)"
     );
 

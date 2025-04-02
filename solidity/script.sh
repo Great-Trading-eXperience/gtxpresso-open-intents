@@ -6,11 +6,13 @@ source .env
 # --rpc-url $RPC_URL_ARB \
 # --quiet > /dev/null 2>&1 && echo "success: true" || echo "success: false"
 
+
 # cast send $WETH_ADDRESS "mint(address,uint256)" \
 # $ROUTER_OWNER 250000000000000000000000000000000 \
 # --private-key $HYP_KEY \
 # --rpc-url $RPC_URL_ARB \
 # --quiet > /dev/null 2>&1 && echo "success: true" || echo "success: false"
+
 
 # cast send $WBTC_ADDRESS "mint(address,uint256)" \
 # $ROUTER_OWNER 250000000000000000000000000000000 \

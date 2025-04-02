@@ -243,12 +243,24 @@ const enoughBalanceOnDestination: Hyperlane7683Rule = async (
     const provider = context.multiProvider.getProvider(chainId);
 
     for (const tokenAddress in chainTokens) {
+      log.info({
+        msg: "Checking balance",
+        tokenAddress,
+        chainId,
+        fillerAddress,
+      })
       const amount = chainTokens[tokenAddress];
       const balance = await retrieveTokenBalance(
         tokenAddress,
         fillerAddress,
         provider,
       );
+      log.info({
+        msg: "Balance",
+        tokenAddress,
+        chainId,
+        balance: balance.toString(),
+      })
 
       if (balance.lt(amount)) {
         return {
