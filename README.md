@@ -78,6 +78,43 @@ Espresso **solves these issues** by offering:
 - **Arbitrum Orbit + Espresso** for **high-speed execution & reduced costs**.
 - Built specifically for **cross-chain liquidity aggregation**.
 
+How WETH to WBTC Swap Works in GTXpresso
+
+1. Open Intent Creation (User Action)
+   The user initiates an open intent to swap WETH → WBTC on the parent chain (e.g., Ethereum).
+
+The intent is signed and sent via the Open Intents Framework (OIF).
+
+2. Intent Transmission to GTXpresso
+   Hyperlane relays the signed swap intent from the parent chain to GTXpresso.
+
+The OIF Router on GTXpresso validates the intent and begins processing.
+
+3. Order Matching & Execution
+   GTXpresso checks its CLOB order book for a direct WETH/WBTC market order.
+
+If a WETH/WBTC market order exists, it directly executes the trade.
+
+If no direct match is found, GTXpresso applies routing:
+
+First, sell WETH for USDC (Market Order 1).
+
+Then, use the acquired USDC to buy WBTC (Market Order 2).
+
+GTXpresso executes these orders in sequence using its CLOB liquidity to ensure the most efficient execution.
+
+4. Asset Bridging Back to Parent Chain
+   After the trade is executed, the purchased WBTC is sent to the user via Hyperlane Bridge.
+
+The user receives WBTC on the parent chain (e.g., Ethereum).
+
+Key Benefits
+Low Latency: Near-instant execution of trades within GTXpresso.
+
+Optimized Routing: If no direct market exists, GTXpresso routes the trade through USDC for optimal execution (WETH → USDC → WBTC).
+
+Cross-Chain Settlement: The user only interacts with the parent chain, while execution takes place within the high-performance GTXpresso rollup.
+
 ## 📌 Deployments
 
 ### 1️⃣ Rollup Deployment
@@ -91,10 +128,10 @@ Espresso **solves these issues** by offering:
 ### 2️⃣ Hyperlane Deployment
 
 - **Core Deployments:**
-  - [Arbitrum Sepolia](hyperlane/chains/arbitrumsepolia/addresses.yaml)
-  - [GTXpresso](hyperlane/chains/gtxpresso/addresses.yaml)
+  - [Arbitrum Sepolia](https://github.com/Great-Trading-eXperience/gtxpresso-open-intents/tree/main/hyperlane/chains/arbitrumsepolia/addresses.yaml)
+  - [GTXpresso](https://github.com/Great-Trading-eXperience/gtxpresso-open-intents/tree/main/hyperlane/chains/gtxpresso/addresses.yaml)
 - **Warp Routes:**
-  - [Arbitrum Sepolia - GTXpresso](hyperlane/deployments/warp_routes)
+  - [Arbitrum Sepolia - GTXpresso](https://github.com/Great-Trading-eXperience/gtxpresso-open-intents/tree/main/hyperlane/deployments/warp_routes)
 
 ### 3️⃣ Open Intents Framework Deployment
 
