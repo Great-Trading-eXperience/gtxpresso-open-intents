@@ -13,6 +13,7 @@ With **ERC-7683 support**, GTXpresso facilitates **standardized cross-chain tran
 ### 1️⃣ CLOB Contracts
 
 - **Deployed on an Espresso-powered rollup** for efficient order placement, matching, and settlement.
+- Refference: https://github.com/Great-Trading-eXperience/clob-dex/tree/feature/swap
 
 ### 2️⃣ Espresso-Powered Rollup
 
@@ -78,42 +79,37 @@ Espresso **solves these issues** by offering:
 - **Arbitrum Orbit + Espresso** for **high-speed execution & reduced costs**.
 - Built specifically for **cross-chain liquidity aggregation**.
 
-How WETH to WBTC Swap Works in GTXpresso
+## **🔄 How WETH to WBTC Swap Operates in GTXpresso**
 
-1. Open Intent Creation (User Action)
-   The user initiates an open intent to swap WETH → WBTC on the parent chain (e.g., Ethereum).
+**1. Initiating an Open Intent (User Action)**
 
-The intent is signed and sent via the Open Intents Framework (OIF).
+- The user creates an open intent to swap WETH for WBTC on the parent chain, such as Ethereum.
+- This intent is signed and transmitted through the **Open Intents Framework (OIF)**.
 
-2. Intent Transmission to GTXpresso
-   Hyperlane relays the signed swap intent from the parent chain to GTXpresso.
+**2. Transmitting Intent to GTXpresso**
 
-The OIF Router on GTXpresso validates the intent and begins processing.
+- **Hyperlane** facilitates the relay of the signed swap intent from the parent chain to GTXpresso.
+- Upon arrival, the **OIF Router** on GTXpresso authenticates the intent and initiates processing.
 
-3. Order Matching & Execution
-   GTXpresso checks its CLOB order book for a direct WETH/WBTC market order.
+**3. Matching Orders & Executing Trades**
 
-If a WETH/WBTC market order exists, it directly executes the trade.
+- GTXpresso examines its **CLOB order book** for a direct WETH/WBTC market order.
+- If a direct market order is available, the trade is executed immediately.
+- In the absence of a direct match, GTXpresso employs routing strategies:
+  - Initially, WETH is sold for USDC (**Market Order 1**).
+  - Subsequently, the obtained USDC is used to purchase WBTC (**Market Order 2**).
+- These orders are executed sequentially by GTXpresso using its CLOB liquidity to ensure optimal execution.
 
-If no direct match is found, GTXpresso applies routing:
+**4. Bridging Assets Back to the Parent Chain**
 
-First, sell WETH for USDC (Market Order 1).
+- Once the trade is completed, the acquired WBTC is transferred to the user via the **Hyperlane Bridge**.
+- The user receives WBTC on the parent chain, such as Ethereum.
 
-Then, use the acquired USDC to buy WBTC (Market Order 2).
+**Key Advantages**
 
-GTXpresso executes these orders in sequence using its CLOB liquidity to ensure the most efficient execution.
-
-4. Asset Bridging Back to Parent Chain
-   After the trade is executed, the purchased WBTC is sent to the user via Hyperlane Bridge.
-
-The user receives WBTC on the parent chain (e.g., Ethereum).
-
-Key Benefits
-Low Latency: Near-instant execution of trades within GTXpresso.
-
-Optimized Routing: If no direct market exists, GTXpresso routes the trade through USDC for optimal execution (WETH → USDC → WBTC).
-
-Cross-Chain Settlement: The user only interacts with the parent chain, while execution takes place within the high-performance GTXpresso rollup.
+- **Low Latency:** Enables near-instant trade execution within GTXpresso.
+- **Optimized Routing:** In the absence of a direct market, GTXpresso routes the trade through USDC for optimal execution (WETH → USDC → WBTC).
+- **Cross-Chain Settlement:** The user interacts solely with the parent chain, while execution occurs within the high-performance GTXpresso rollup.
 
 ## 📌 Deployments
 
@@ -136,10 +132,16 @@ Cross-Chain Settlement: The user only interacts with the parent chain, while exe
 ### 3️⃣ Open Intents Framework Deployment
 
 - **Router Deployments:**
-  - **Arbitrum Sepolia**: `0x87c7Dfd251B2DCfA7aA5E3d117b10009e0f7d770`
-  - **GTXpresso**: `0x9EC1bC024132cA18AFC6da7395B7121b73C5E01E`
+  - **Arbitrum Sepolia**: `0x53e4A99A8f06C612ee93D279Ae8C9A3B7549FF3D`
+  - **GTXpresso**: `0x16102f66fd353153B5F89838d9d3AA6186B82211`
 
-### 4️⃣ ERC20 Token Addresses
+### 4️⃣ CLOB Addresses
+
+- **GTX Router Contract Address:** `0xf6426F9B25b6c8B3d8Ec12bdB9449077ECEb848b`
+- **Balance Manager Contract Address:** `0xFba6012052bA4154960849E05b44092b59e1497a`
+- **Pool Manager Contract Address:** `0xA2C73383C4B40d64f7cF1BDDBe00a5B6aa5eA3dF`
+
+### 5️⃣ ERC20 Token Addresses
 
 #### 🔹 Arbitrum Sepolia
 
