@@ -135,7 +135,7 @@ Espresso **solves these issues** by offering:
   - **Arbitrum Sepolia**: `0x53e4A99A8f06C612ee93D279Ae8C9A3B7549FF3D`
   - **GTXpresso**: `0x16102f66fd353153B5F89838d9d3AA6186B82211`
 
-### 4️⃣ CLOB Addresses
+### 4️⃣ CLOB Addresses Deployed on GTXpresso
 
 - **GTX Router Contract Address:** `0xf6426F9B25b6c8B3d8Ec12bdB9449077ECEb848b`
 - **Balance Manager Contract Address:** `0xFba6012052bA4154960849E05b44092b59e1497a`
@@ -161,6 +161,12 @@ Espresso **solves these issues** by offering:
 - **DOGE:** `0x3CfA285c5Cc69252093A5a2859869489D5A63650`
 - **LINK:** `0x13378548Fef28F9C17D2B721C41C7796A740266d`
 - **TRUMP:** `0x6F199125B610A34F3a9A02c24416EAB4Ac1d46F6`
+
+## 🔗 Relevant Links
+
+[Video Demo](https://drive.google.com/drive/folders/1lVks0fOD2_bt1QYrojlcTZIeEN9i-qKY)
+[Video Docker Logs](https://youtu.be/CP5wdnj7exQ)
+[Presentation](https://www.canva.com/design/DAGjaqBGVzQ/UZ_yJjH-a2yoWvPgvPVTig/view)
 
 ## 🛠️ Tech Stack & References
 
